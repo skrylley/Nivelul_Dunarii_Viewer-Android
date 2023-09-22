@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.skrylley.myapplication" >
 
-    <application
+    <application android:name=".Global"
+
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -22,6 +23,7 @@
         <activity android:name=".ecran2">
             <!-- Alte atribute ale activității, cum ar fi intent-filters, dacă este cazul -->
         </activity>
+
         <activity android:name=".AllActivity">
             <!-- Alte atribute ale activității, cum ar fi intent-filters, dacă este cazul -->
         </activity>
@@ -30,6 +32,13 @@
             <!-- Alte atribute ale activității, cum ar fi intent-filters, dacă este cazul -->
         </activity>
 
+        <activity android:name=".SelectedActivity">
+            <!-- Alte atribute ale activității, cum ar fi intent-filters, dacă este cazul -->
+        </activity>
+
+        <activity android:name=".SettingsActivity">
+            <!-- Alte atribute ale activității, cum ar fi intent-filters, dacă este cazul -->
+        </activity>
 
     </application>
 

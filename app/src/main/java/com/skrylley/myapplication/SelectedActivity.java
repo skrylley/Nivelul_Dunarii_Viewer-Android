@@ -1,4 +1,6 @@
 package com.skrylley.myapplication;
 
-public class SelectedActivity {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class SelectedActivity extends AppCompatActivity {
 }

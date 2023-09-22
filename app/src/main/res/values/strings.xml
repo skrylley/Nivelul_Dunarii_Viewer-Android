@@ -4,4 +4,13 @@
     <string name="favorite">Favorite</string>
     <string name="toateorasele">Toate Orasele</string>
     <string name="back">Back</string>
+    <string name="buttonBackText">Back</string>
+    <string name="switchColorText">Night Mode</string>
+    <string name="buttonSettingsText">Setari</string>
+
+    <string name="colorBackgroundWhiteMode">#FFFFFF</string>
+    <string name="colorBackgroundDarkMode">#222222</string>
+
+    <string name="colorTextWhiteMode">#000000</string>
+    <string name="colorTextDarkMode">#0099FF</string>
 </resources>
