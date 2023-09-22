@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
         Global global = (Global) getApplication();
         Resources resources = getResources();
 
-
         // BUTON FAVORITE
         Button buttonFavorite = findViewById(R.id.buttonFavorite);
         buttonFavorite.setOnClickListener(new View.OnClickListener() {
