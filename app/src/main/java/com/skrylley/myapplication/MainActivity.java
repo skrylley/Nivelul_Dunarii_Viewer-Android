@@ -2,10 +2,11 @@ package com.skrylley.myapplication;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
+import android.widget.TextView;
 
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -59,13 +60,14 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         });
-
+        TextView title = findViewById(R.id.title);
         // -------------------------------------------------------------------------------------------------------------------------------------------
         // CULORI
         if(global.getGlobalVariableColorCheck())
         {
-
             getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.colorBackgroundDarkMode));
+
+            title.setTextColor(getResources().getColor(R.color.colorTextDarkMode));
 
             buttonFavorite.setBackgroundColor(getResources().getColor(R.color.colorButtonDarkMode));
             buttonFavorite.setTextColor(getResources().getColor(R.color.colorTextDarkMode));
@@ -78,6 +80,8 @@ public class MainActivity extends AppCompatActivity {
         }
         else {
             getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.colorBackgroundWhiteMode));
+
+            title.setTextColor(getResources().getColor(R.color.colorTextWhiteMode));
 
             buttonFavorite.setBackgroundColor(getResources().getColor(R.color.colorButtonWhiteMode));
             buttonFavorite.setTextColor(getResources().getColor(R.color.colorTextWhiteMode));

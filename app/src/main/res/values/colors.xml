@@ -2,13 +2,14 @@
 <resources>
     <color name="colorPrimary">#FF6464</color>
     <color name="colorPrimaryDark">#51A2D5</color>
-    <color name="colorAccent">#0099FF</color>
+    <color name="colorAccent">#51A2D5</color>
 
     <color name="colorBackgroundWhiteMode">#FFFFFF</color>
     <color name="colorBackgroundDarkMode">#222222</color>
 
     <color name="colorTextWhiteMode">#000000</color>
-    <color name="colorTextDarkMode">#0099FF</color>
+    <color name="colorTextDarkMode">#51A2D5</color>
+    <!-- <color name="colorTextDarkMode">#0099FF</color -->
 
     <color name="colorButtonWhiteMode">#DDDDDD</color>
     <color name="colorButtonDarkMode">#444444</color>
