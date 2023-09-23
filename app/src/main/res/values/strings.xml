@@ -9,4 +9,12 @@
     <string name="buttonSettingsText">Setari</string>
     <string name="textConnecting">Connecting</string>
     <string name="mainActivityTitle">Nivelul Dunării</string>
+
+    <!--- Variabile CardVertical -->
+
+    <string name="cardLocalitate">Localitate: </string>
+    <string name="cardKm">Km: </string>
+    <string name="cardVariatie">Variatie: </string>
+    <string name="cardNivel">Nivel: </string>
+
 </resources>

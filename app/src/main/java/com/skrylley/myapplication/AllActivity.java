@@ -29,7 +29,7 @@
             parse.execute();
 
             // Casete text
-            TextView textView = findViewById(R.id.textView);    // HELLO WORLD
+            //TextView textView = findViewById(R.id.textView);    // HELLO WORLD
             TextView textView2 = findViewById(R.id.textView2);  // HELLO DUNARE - VEZI COD LA FINAL
 
 
@@ -55,7 +55,7 @@
                 buttonBack.setBackgroundColor(getResources().getColor(R.color.colorButtonDarkMode));
                 buttonBack.setTextColor(getResources().getColor(R.color.colorTextDarkMode));
 
-                textView.setTextColor(getResources().getColor(R.color.colorTextDarkMode));
+                //textView.setTextColor(getResources().getColor(R.color.colorTextDarkMode));
                 textView2.setTextColor(getResources().getColor(R.color.colorTextDarkMode));
             }
             else {
@@ -64,7 +64,7 @@
                 buttonBack.setBackgroundColor(getResources().getColor(R.color.colorButtonWhiteMode));
                 buttonBack.setTextColor(getResources().getColor(R.color.colorTextWhiteMode));
 
-                textView.setTextColor(getResources().getColor(R.color.colorTextWhiteMode));
+                //textView.setTextColor(getResources().getColor(R.color.colorTextWhiteMode));
                 textView2.setTextColor(getResources().getColor(R.color.colorTextWhiteMode));
             }
             // -------------------------------------------------------------------------------------------------------------------------------------------
