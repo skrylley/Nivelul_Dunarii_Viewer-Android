@@ -32,6 +32,12 @@
             //TextView textView = findViewById(R.id.textView);    // HELLO WORLD
             TextView textView2 = findViewById(R.id.textView2);  // HELLO DUNARE - VEZI COD LA FINAL
 
+            //Valori Cardview
+            TextView valLocalitate = findViewById(R.id.valLocalitate);
+            TextView valKm = findViewById(R.id.valKm);
+            TextView valVariatie = findViewById(R.id.valVariatie);
+            TextView valNivel = findViewById(R.id.valNivel);
+
 
             // BUTON BACK
             Button buttonBack = findViewById(R.id.buttonBack);

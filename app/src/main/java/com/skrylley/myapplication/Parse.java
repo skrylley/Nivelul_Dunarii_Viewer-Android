@@ -17,7 +17,7 @@ public class Parse extends AsyncTask<Void, Void, String> {
     protected String doInBackground(Void... params) {
         try {
             // CERERE CONECTIUNE JSON
-            Document document = Jsoup.connect("http://www.zillow.com/denver-co/").get();
+            Document document = Jsoup.connect("https://www.afdj.ro/ro/cotele-dunarii").get();
 
             // IA TITLUL
             return document.title();
