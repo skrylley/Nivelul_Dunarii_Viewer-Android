@@ -17,6 +17,9 @@ public class AllActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all);
+        Parse parse = (Parse) getApplication();
+        TextView textView2 = findViewById(R.id.textView2);
+        textView2.setText(parse.getTitle());
 
         // ANIMATIE TRANZITIE
         overridePendingTransition(R.transition.animation_rightleft_in, R.transition.animation_rightleft_out);
@@ -39,7 +42,6 @@ public class AllActivity extends AppCompatActivity {
         // Caseta Text Hello World
 
         TextView textView = findViewById(R.id.textView);
-
         // -------------------------------------------------------------------------------------------------------------------------------------------
         // CULORI
         if(global.getGlobalVariableColorCheck())
@@ -70,5 +72,4 @@ public class AllActivity extends AppCompatActivity {
         startActivity(intent); // Deschide activitatea specificată
         finish();
     }
-
 }
