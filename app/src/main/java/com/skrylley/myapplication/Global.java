@@ -5,6 +5,10 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 
 public class Global extends Application {
+
+
+
+
     private static final String PREFS_NAME = "my_preferences"; // Numele fișierului SharedPreferences
     private static final String GLOBAL_COLOR_CHECK_KEY = "global_checker_culoare"; // Cheia pentru verificarea culorii globală
 

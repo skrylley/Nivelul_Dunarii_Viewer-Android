@@ -7,6 +7,6 @@
     <string name="buttonBackText">Back</string>
     <string name="switchColorText">Night Mode</string>
     <string name="buttonSettingsText">Setari</string>
-
+    <string name="textConnecting">Connecting</string>
     <string name="mainActivityTitle">Nivelul Dunării</string>
 </resources>

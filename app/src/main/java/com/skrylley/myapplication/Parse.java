@@ -1,39 +1,40 @@
 package com.skrylley.myapplication;
 
-import android.app.Application;
-
+import android.os.AsyncTask;
 import java.io.IOException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
 
-/*
- * This class is used for HTML parsing from URL using Jsoup.
- * @author Andrew Schwartz
- */
 
-public class Parse extends Application {
-    static Document document;
-    static String title = document.title(); //Get title
-    public static void onCreate(String args[]){
-        super.onCreate();
-        print("running...");
+public class Parse extends AsyncTask<Void, Void, String> {
+    private AllActivity mActivity;
+
+    public Parse(AllActivity activity) {
+        mActivity = activity;
+    }
+
+    @Override
+    protected String doInBackground(Void... params) {
         try {
-            //Get Document object after parsing the html from given url.
-            document = Jsoup.connect("http://www.zillow.com/denver-co/").get();
+            // CERERE CONECTIUNE JSON
+            Document document = Jsoup.connect("http://www.zillow.com/denver-co/").get();
 
-            print("  Title: " + title); //Print title.
-
-        } catch (IOException e) {
-            e.printStackTrace();
+            // IA TITLUL
+            return document.title();
         }
-        print("done");
+
+        catch (IOException e) {
+            e.printStackTrace();
+            // MESAJ IN CAZ DE EROARE
+            return "ERROR";
+        }
+
     }
 
-    public static void print(String string) {
-        print(string);
-    }
-    public String getTitle() {
-        return title;
+    @Override
+    protected void onPostExecute(String title) {
+
+        // ACTUALIZARE CASETA TEXT DIN ALLACTIVITY
+        mActivity.updateTextView(title);
     }
 }
