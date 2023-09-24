@@ -33,7 +33,7 @@
             TextView textView2 = findViewById(R.id.textView2);  // HELLO DUNARE - VEZI COD LA FINAL
 
             //Valori Cardview
-            TextView valLocalitate = findViewById(R.id.valLocalitate);
+            //TextView valLocalitate = findViewById(R.id.valLocalitate);
             TextView valKm = findViewById(R.id.valKm);
             TextView valVariatie = findViewById(R.id.valVariatie);
             TextView valNivel = findViewById(R.id.valNivel);
@@ -87,9 +87,9 @@
 
 
         // ACTUALIZARE CASETA TEXT 2
-        public void updateTextView(String title) {
+        public void updateTextView(String valLocalitate) {
 
-            TextView textView2 = findViewById(R.id.textView2);
-            textView2.setText(title);
+            TextView valLocalitate1 = findViewById(R.id.valLocalitate);
+            valLocalitate1.setText(valLocalitate);
         }
     }

@@ -4,6 +4,8 @@ import android.os.AsyncTask;
 import java.io.IOException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 
 public class Parse extends AsyncTask<Void, Void, String> {
@@ -20,7 +22,8 @@ public class Parse extends AsyncTask<Void, Void, String> {
             Document document = Jsoup.connect("https://www.afdj.ro/ro/cotele-dunarii").get();
 
             // IA TITLUL
-            return document.title();
+            Elements elements = document.select("h2.title");
+            return elements.text();
         }
 
         catch (IOException e) {
@@ -32,9 +35,9 @@ public class Parse extends AsyncTask<Void, Void, String> {
     }
 
     @Override
-    protected void onPostExecute(String title) {
+    protected void onPostExecute(String valLocalitate) {
 
         // ACTUALIZARE CASETA TEXT DIN ALLACTIVITY
-        mActivity.updateTextView(title);
+        mActivity.updateTextView(valLocalitate);
     }
 }
