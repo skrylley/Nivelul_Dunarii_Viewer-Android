@@ -17,5 +17,10 @@
     <color name="colorSwitchOff">#222222</color>
     <color name="colorSwitchOn">#005191</color>
 
+    <color name="colorToastBackgroundWhiteMode">#F6F6F6</color>
+    <color name="colorToastBackgroundDarkMode">#A3000000</color>
+    <color name="colorToastTextWhiteMode">#000000</color>
+    <color name="colorToastTextDarkMode">#51A2D5</color>
+
 
 </resources>

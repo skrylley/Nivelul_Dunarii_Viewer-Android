@@ -12,14 +12,14 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 
-public class Parse extends AsyncTask<Void, Void, Void> {
+public class ParseAll extends AsyncTask<Void, Void, Void> {
     private AllActivity mActivity;
     private String[] valLocalitate;
     private String[] valKm;
     private String[] valNivel;
     private String[] valVariatie;
     private int rowCount;
-    public Parse(AllActivity activity) {
+    public ParseAll(AllActivity activity) {
         mActivity = activity;
     }
 

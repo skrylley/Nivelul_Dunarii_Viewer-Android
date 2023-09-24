@@ -20,7 +20,15 @@ public class Global extends Application {
     private static final String PREFS_NAME = "my_preferences"; // Numele fișierului SharedPreferences
     private static final String GLOBAL_COLOR_CHECK_KEY = "global_checker_culoare"; // Cheia pentru verificarea culorii globală
     private static final String GLOBAL_NUMBER_OF_ROWS = "global_no_of_rows"; // Cheia pentru verificarea culorii globală
+    private static final String GLOBAL_FAVORITE= "global_checker_fav"; // Cheia pentru verificarea culorii globală
     private boolean globalColorCheck;
+    private boolean vectorFav[] = new boolean[100];
+    private boolean vectorFavinit[]={
+            false, false, false, false, false,
+            false, false, false, false, false,
+            false, false, false, false, false,
+            false, false, false, false, false,
+            false, false, false  };
 
     private boolean ifRefresh = false;
     private int globalNoOfRows;
@@ -34,6 +42,14 @@ public class Global extends Application {
         ifRefresh = value;
     }
 
+
+    public boolean[] getVectorFav() {
+        return vectorFav;
+    }
+
+    public void setVectorFav(boolean value, int i) {
+        vectorFav[i] = value;
+    }
 
 
     public boolean getGlobalVariableColorCheck() {
@@ -59,6 +75,7 @@ public class Global extends Application {
         SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putBoolean(GLOBAL_COLOR_CHECK_KEY, globalColorCheck);
+        editor.putBoolean(GLOBAL_FAVORITE, globalColorCheck);
         editor.apply();
     }
 
@@ -68,7 +85,8 @@ public class Global extends Application {
         // Aici poți prelua valorile din SharedPreferences la pornirea aplicației
         SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         globalColorCheck = preferences.getBoolean(GLOBAL_COLOR_CHECK_KEY, false);
-
+        for(int k = 0; k < 100; k++)
+            vectorFav[k] = preferences.getBoolean(GLOBAL_FAVORITE, false);
         new Thread(new Runnable() {
             @Override
             public void run() {

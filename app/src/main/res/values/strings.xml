@@ -19,4 +19,6 @@
     <string name="cardVariatie">Variatie: </string>
     <string name="cardNivel">Nivel: </string>
 
+    <string name="noInternetConnection">Fara conexiune la internet\n\nDati Refresh</string>
+
 </resources>

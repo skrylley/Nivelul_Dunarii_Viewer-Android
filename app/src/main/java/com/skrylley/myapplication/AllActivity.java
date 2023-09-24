@@ -1,31 +1,29 @@
     package com.skrylley.myapplication;
 
     import android.content.Intent;
-    import android.content.res.Resources;
     import android.os.Build;
     import android.os.Bundle;
-    import android.util.Log;
     import android.view.View;
     import android.widget.Button;
     import android.widget.LinearLayout;
-    import android.widget.ScrollView;
     import android.widget.TextView;
-    import com.skrylley.myapplication.Parse;
+    import android.widget.ToggleButton;
 
     import androidx.annotation.RequiresApi;
     import androidx.appcompat.app.AppCompatActivity;
     import androidx.cardview.widget.CardView;
 
-    import org.w3c.dom.Text;
 
     import java.util.ArrayList;
-    import java.util.Arrays;
 
     public class AllActivity extends AppCompatActivity {
 
         String valLoc[], valKm[], valNiv[], valVar[];
         int N; // nr de elemente GLOBAL
         ArrayList<CardView> cardViewList = new ArrayList<>();
+
+        ArrayList<ToggleButton> toggleButtonList = new ArrayList<>();
+
 
         ArrayList<TextView> cardLocalitateList = new ArrayList<>();
         ArrayList<TextView> cardKmList = new ArrayList<>();
@@ -49,8 +47,9 @@
             // BAGAM GLOBALUL
             Global global = (Global) getApplication();
             N = global.getGlobalNumberOfRows();
+            boolean isToggled[] = global.getVectorFav();
             // BAGAM PARSUL
-            Parse parse = new Parse(this);
+            ParseAll parse = new ParseAll(this);
             parse.execute();
             if(global.getIfRefresh()==true)
             {
@@ -60,6 +59,9 @@
                     e.printStackTrace();
                 }
                 global.setGlobalNumberOfRows(parse.getSize());
+                N = global.getGlobalNumberOfRows();
+
+                //toastRefresh.show();
             }
             global.setIfRefresh(false);
 
@@ -67,7 +69,6 @@
             // CARD VIEW RECURSIV
             // -------------------------------------------------------------------------------------------------------------------------------------------
             LinearLayout linearLayout = findViewById(R.id.cardLinearLayout); // Acesta este LinearLayout-ul tău din XML
-            //int N = 3; // Numărul de CardView-uri pe care vrei să le afișezi
 
             for (int i = 0; i < N; i++) {
                 CardView cardView = new CardView(this);
@@ -88,6 +89,32 @@
                 cardViewList.add(cardView);
 
                 // -------------------------------------------------------------------------------------------------------------------------------------------
+                //BUTTON FAVORITE
+                ToggleButton toggleButtonFav = new ToggleButton(this);
+                toggleButtonFav.setChecked(global.getVectorFav()[i]);
+
+                int finalI = i;
+                toggleButtonFav.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        if (global.getVectorFav()[finalI]) {
+                            global.setVectorFav(false, finalI);
+                        } else {
+                            global.setVectorFav(true, finalI);
+                        }
+
+
+                    }
+                });
+                toggleButtonFav.setPadding( 10, 10, 10, 10);
+                        /*getResources().getDimensionPixelSize(R.dimen.card_leftValues_marginLeft),
+                        getResources().getDimensionPixelSize(R.dimen.card_leftValues_marginTop) *1,
+                        getResources().getDimensionPixelSize(R.dimen.card_leftValues_marginRight),
+                        getResources().getDimensionPixelSize(R.dimen.card_leftValues_marginBottom));*/ // LEFT TOP RIGHT BOTTOM
+
+                toggleButtonFav.setLayoutParams(new LinearLayout.LayoutParams(150,150));
+                //toggleButtonFav.setText(getResources().getString(R.string.cardLocalitate));
+                cardView.addView(toggleButtonFav);
+                toggleButtonList.add(toggleButtonFav);
 
                 // LOCALITATE
                 TextView cardLocalitate = new TextView(this);
@@ -226,19 +253,9 @@
             // -------------------------------------------------------------------------------------------------------------------------------------------
 
 
-            // Casete text
-            //TextView textView = findViewById(R.id.textView);    // HELLO WORLD
-            //TextView textView2 = findViewById(R.id.textView2);  // HELLO DUNARE - VEZI COD LA FINAL
-
-            //Valori Cardview
-            //TextView valLocalitate = findViewById(R.id.valLocalitate);
-            //TextView valKm = findViewById(R.id.valKm);
-            //TextView valVariatie = findViewById(R.id.valVariatie);
-            //TextView valNivel = findViewById(R.id.valNivel);
-
-
             // BUTON BACK
             Button buttonBack = findViewById(R.id.buttonBack);
+            TextView textNoInternet = findViewById(R.id.textNoInternet);
             buttonBack.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     // Definește intentul pentru a deschide o altă activitate
@@ -250,24 +267,6 @@
             // BUTON REFRESH
             Button buttonRefresh = findViewById(R.id.buttonRefresh);
             buttonRefresh.setOnClickListener(new View.OnClickListener() {
-                /*public void onClick(View v) {
-                    // Definește intentul pentru a deschide o altă activitate
-                    /*Intent intent = new Intent(AllActivity.this, MainActivity.class);
-                    startActivity(intent); // Deschide activitatea specificată
-                    finish();
-                    parse.execute();
-                    try {
-                        parse.get();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-
-                    //updateLocalitate(valNiv);
-                    Intent intent = getIntent();
-                    finish(); // Termină activitatea curentă
-                    startActivity(intent); // Redeschide activitatea
-                }*/
                 public void onClick(View v) {
                     // Definește intentul pentru a redeschide aceeași activitate
                     global.setIfRefresh(true);
@@ -291,6 +290,7 @@
                 buttonRefresh.setBackgroundColor(getResources().getColor(R.color.colorButtonDarkMode));
                 buttonRefresh.setTextColor(getResources().getColor(R.color.colorTextDarkMode));
 
+                textNoInternet.setTextColor(getResources().getColor(R.color.colorTextDarkMode));
                 for (int i = 0; i < N; i++) {
                     cardLocalitateList.get(i).setTextColor(getResources().getColor(R.color.colorTextDarkMode));
                     cardKmList.get(i).setTextColor(getResources().getColor(R.color.colorTextDarkMode));
@@ -303,10 +303,6 @@
                     cardValNivelList.get(i).setTextColor(getResources().getColor(R.color.colorTextDarkMode));
 
                     cardViewList.get(i).setCardBackgroundColor(getResources().getColor(R.color.colorButtonDarkMode));
-                    //TextView cardValNivelText = cardValNivelList.get(i);
-                    //cardValNivelText.setTextColor(getResources().getColor(R.color.colorTextDarkMode));
-                    //textView.setTextColor(getResources().getColor(R.color.colorTextDarkMode));
-                    //textView2.setTextColor(getResources().getColor(R.color.colorTextDarkMode));
                 }
             }
             else {
@@ -319,6 +315,7 @@
                 buttonRefresh.setBackgroundColor(getResources().getColor(R.color.colorButtonWhiteMode));
                 buttonRefresh.setTextColor(getResources().getColor(R.color.colorTextWhiteMode));
 
+                textNoInternet.setTextColor(getResources().getColor(R.color.colorTextWhiteMode));
                 for (int i = 0; i < N; i++) {
                     cardLocalitateList.get(i).setTextColor(getResources().getColor(R.color.colorTextWhiteMode));
                     cardKmList.get(i).setTextColor(getResources().getColor(R.color.colorTextWhiteMode));
@@ -332,8 +329,6 @@
 
                     cardViewList.get(i).setCardBackgroundColor(getResources().getColor(R.color.colorButtonWhiteMode));
                 }
-                //textView.setTextColor(getResources().getColor(R.color.colorTextWhiteMode));
-                //textView2.setTextColor(getResources().getColor(R.color.colorTextWhiteMode));
             }
             // -------------------------------------------------------------------------------------------------------------------------------------------
         }
@@ -355,7 +350,6 @@
                 TextView textView = cardValLocalitateList.get(i);
                 if (valLoc[i] != null) {
                     textView.setText(valLoc[i]);
-                    //Log.d("Parse", "valLocalitate FINAL: " + (i));
                 }
                 else
                     textView.setText("Error");
