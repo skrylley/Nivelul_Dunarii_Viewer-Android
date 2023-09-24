@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
         Global global = (Global) getApplication();
         Resources resources = getResources();
 
+
+
         // BUTON FAVORITE
         Button buttonFavorite = findViewById(R.id.buttonFavorite);
         buttonFavorite.setOnClickListener(new View.OnClickListener() {
@@ -93,10 +95,16 @@ public class MainActivity extends AppCompatActivity {
             buttonSetari.setTextColor(getResources().getColor(R.color.colorTextWhiteMode));
         }
         // -------------------------------------------------------------------------------------------------------------------------------------------
-
+        /*try {
+            parseOnlySize.get();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }*/
 
     }
 
+
 }
+
 
 
