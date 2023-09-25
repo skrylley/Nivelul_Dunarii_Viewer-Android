@@ -45,6 +45,8 @@
                 android:layout_height="50dp"
                 android:orientation="horizontal">
 
+                <!-- Buton Back cu text
+
                 <Button
                     android:id="@+id/buttonBack"
                     android:layout_width="0dp"
@@ -54,6 +56,32 @@
                     android:layout_marginEnd="100dp"
                     android:layout_marginRight="100dp" />
 
+                -->
+
+                <ImageButton
+                    android:id="@+id/buttonBack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="A tiny Android icon"
+                    android:src="@drawable/arrow_left"
+                    app:tint="#000"
+                    app:backgroundTint="#00FFFFFF" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" /> <!-- Spațiu flexibil care va umple spațiul disponibil între butoane -->
+
+                <ImageButton
+                    android:id="@+id/buttonRefresh"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="A tiny Android icon"
+                    android:src="@drawable/refresh"
+                    app:backgroundTint="#00FFFFFF"
+                    app:tint="#000" />
+
+                <!-- Button Refresh cu Text
                 <Button
                     android:id="@+id/buttonRefresh"
                     android:layout_width="0dp"
@@ -62,7 +90,7 @@
                     android:text="@string/refresh"
                     android:layout_marginStart="100dp"
                     android:layout_marginLeft="100dp" />
-
+                -->
             </LinearLayout>
 
 
