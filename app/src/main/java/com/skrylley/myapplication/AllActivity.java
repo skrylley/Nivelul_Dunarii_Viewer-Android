@@ -1,11 +1,17 @@
     package com.skrylley.myapplication;
 
     import android.content.Intent;
+    import android.graphics.drawable.Drawable;
     import android.os.Build;
     import android.os.Bundle;
+    import android.util.Log;
     import android.view.View;
+    import android.view.ViewGroup;
     import android.widget.Button;
+
+    import android.widget.ImageView;
     import android.widget.LinearLayout;
+    import android.widget.RelativeLayout;
     import android.widget.TextView;
     import android.widget.ToggleButton;
 
@@ -15,15 +21,16 @@
 
 
     import java.util.ArrayList;
+    import java.util.Vector;
 
     public class AllActivity extends AppCompatActivity {
 
+        // VALORI CU DATELE DE AFISAT
         String valLoc[], valKm[], valNiv[], valVar[];
         int N; // nr de elemente GLOBAL
         ArrayList<CardView> cardViewList = new ArrayList<>();
 
         ArrayList<ToggleButton> toggleButtonList = new ArrayList<>();
-
 
         ArrayList<TextView> cardLocalitateList = new ArrayList<>();
         ArrayList<TextView> cardKmList = new ArrayList<>();
@@ -40,14 +47,14 @@
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_all);
-
             // ANIMATIE TRANZITIE
             overridePendingTransition(R.transition.animation_rightleft_in, R.transition.animation_rightleft_out);
 
             // BAGAM GLOBALUL
             Global global = (Global) getApplication();
             N = global.getGlobalNumberOfRows();
-            boolean isToggled[] = global.getVectorFav();
+            final boolean[] isToggled = new boolean[1];
+
             // BAGAM PARSUL
             ParseAll parse = new ParseAll(this);
             parse.execute();
@@ -60,9 +67,8 @@
                 }
                 global.setGlobalNumberOfRows(parse.getSize());
                 N = global.getGlobalNumberOfRows();
-
-                //toastRefresh.show();
             }
+
             global.setIfRefresh(false);
 
 
@@ -90,29 +96,58 @@
 
                 // -------------------------------------------------------------------------------------------------------------------------------------------
                 //BUTTON FAVORITE
+
+
                 ToggleButton toggleButtonFav = new ToggleButton(this);
-                toggleButtonFav.setChecked(global.getVectorFav()[i]);
+                toggleButtonFav.setLayoutParams(new LinearLayout.LayoutParams(170, 150));
 
-                int finalI = i;
+                //toggleButtonFav.setPaddingRelative(100,100,0,0);
+                toggleButtonFav.setPadding(100,100,0,0);
+
+               // layoutParams.leftMargin = 50;
+                toggleButtonFav.setTextOff("");
+                toggleButtonFav.setTextOn("");
+                toggleButtonFav.setText("");
+
+                toggleButtonFav.setChecked(global.getVectorFav(i)); // Inițializați cu valoarea stocată
+                //ImageView steaFavorite = cardView.findViewById(R.id.steaFavorite);
+                // ++++++++++++++++++++++++++++++++++++++++++++
+                boolean isChecked = global.getVectorFav(i);
+                // LA FEL 1
+                if(isChecked) {
+                    //toggleButtonFav.setText("VERIC");
+                    toggleButtonFav.setBackgroundResource(R.drawable.ic_star_on);
+                }
+                else {
+                    //toggleButtonFav.setText("nu :(");
+                    toggleButtonFav.setBackgroundResource(R.drawable.ic_star_off);
+                }
+                // ++++++++++++++++++++++++++++++++++++++++++++
+
+                int finalI2 = i;
                 toggleButtonFav.setOnClickListener(new View.OnClickListener() {
+                    @Override
                     public void onClick(View v) {
-                        if (global.getVectorFav()[finalI]) {
-                            global.setVectorFav(false, finalI);
-                        } else {
-                            global.setVectorFav(true, finalI);
+                        // ++++++++++++++++++++++++++++++++++++++++++++
+                        // LA FEL 2
+                        boolean isChecked = ((ToggleButton) v).isChecked();
+                        if(isChecked) {
+                            //toggleButtonFav.setText("VERIC");
+                            toggleButtonFav.setBackgroundResource(R.drawable.ic_star_on);
                         }
-
-
+                        else {
+                            //toggleButtonFav.setText("nu :(");
+                            toggleButtonFav.setBackgroundResource(R.drawable.ic_star_off);
+                        }
+                        // ++++++++++++++++++++++++++++++++++++++++++++
+                        global.setVectorFav(isChecked, finalI2);
+                        // Salvați starea ToggleButton-urilor în SharedPreferences
+                        Global global = (Global) getApplication();
+                        global.saveToSharedPreferences();
                     }
                 });
-                toggleButtonFav.setPadding( 10, 10, 10, 10);
-                        /*getResources().getDimensionPixelSize(R.dimen.card_leftValues_marginLeft),
-                        getResources().getDimensionPixelSize(R.dimen.card_leftValues_marginTop) *1,
-                        getResources().getDimensionPixelSize(R.dimen.card_leftValues_marginRight),
-                        getResources().getDimensionPixelSize(R.dimen.card_leftValues_marginBottom));*/ // LEFT TOP RIGHT BOTTOM
 
-                toggleButtonFav.setLayoutParams(new LinearLayout.LayoutParams(150,150));
-                //toggleButtonFav.setText(getResources().getString(R.string.cardLocalitate));
+                //relativeLayout.addView(toggleButtonFav);
                 cardView.addView(toggleButtonFav);
                 toggleButtonList.add(toggleButtonFav);
 

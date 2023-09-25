@@ -49,7 +49,7 @@ public class FavActivity extends AppCompatActivity {
         // BAGAM GLOBALUL
         Global global = (Global) getApplication();
         N = global.getGlobalNumberOfRows();
-        vectorFav = global.getVectorFav();
+        vectorFav = global.getVectorFavAll();
         // BAGAM PARSUL
         ParseFav parse = new ParseFav(this);
         parse.execute();

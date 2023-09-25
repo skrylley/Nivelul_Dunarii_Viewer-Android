@@ -22,5 +22,6 @@
     <color name="colorToastTextWhiteMode">#000000</color>
     <color name="colorToastTextDarkMode">#51A2D5</color>
 
-
+    <color name="colorStarOn">#FFCC00</color>
+    <color name="colorStarOff">#666666</color>
 </resources>

@@ -22,7 +22,7 @@ public class Global extends Application {
     private static final String GLOBAL_NUMBER_OF_ROWS = "global_no_of_rows"; // Cheia pentru verificarea culorii globală
     private static final String GLOBAL_FAVORITE= "global_checker_fav"; // Cheia pentru verificarea culorii globală
     private boolean globalColorCheck;
-    private boolean vectorFav[] = new boolean[100];
+    private boolean vectorFav[];
     private boolean vectorFavinit[]={
             false, false, false, false, false,
             false, false, false, false, false,
@@ -43,12 +43,18 @@ public class Global extends Application {
     }
 
 
-    public boolean[] getVectorFav() {
+    public boolean[] getVectorFavAll() {
         return vectorFav;
+    }
+    public boolean getVectorFav(int i) {
+        return vectorFav[i];
     }
 
     public void setVectorFav(boolean value, int i) {
         vectorFav[i] = value;
+    }
+    public void setVectorFavAll(boolean value[]) {
+        vectorFav = value;
     }
 
 
@@ -70,13 +76,17 @@ public class Global extends Application {
         saveToSharedPreferences();
     }
 
-    private void saveToSharedPreferences() {
+    void saveToSharedPreferences() {
         // Salvează valorile în SharedPreferences
         SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putBoolean(GLOBAL_COLOR_CHECK_KEY, globalColorCheck);
-        editor.putBoolean(GLOBAL_FAVORITE, globalColorCheck);
-        editor.apply();
+        for (int k = 0; k < 100; k++) {
+            // Folosiți o cheie unică pentru fiecare element din vectorFav
+            String favKey = GLOBAL_FAVORITE + "_" + k;
+            editor.putBoolean(favKey, vectorFav[k]);
+        }
+        editor.apply(); // Aplică modificările pentru a le salva în SharedPreferences
     }
 
     public void onCreate() {
@@ -85,8 +95,19 @@ public class Global extends Application {
         // Aici poți prelua valorile din SharedPreferences la pornirea aplicației
         SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         globalColorCheck = preferences.getBoolean(GLOBAL_COLOR_CHECK_KEY, false);
-        for(int k = 0; k < 100; k++)
-            vectorFav[k] = preferences.getBoolean(GLOBAL_FAVORITE, false);
+
+        if (vectorFav == null) {
+            vectorFav = new boolean[100];
+            Arrays.fill(vectorFav, false);
+        }
+
+        for (int k = 0; k < 100; k++) {
+            // Folosiți o cheie unică pentru fiecare element din vectorFav
+            String favKey = GLOBAL_FAVORITE + "_" + k;
+            vectorFav[k] = preferences.getBoolean(favKey, false);
+            Log.d("Parse", "k: " + k + " Val:" + vectorFav[k]);
+        }
+
         new Thread(new Runnable() {
             @Override
             public void run() {
